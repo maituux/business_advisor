@@ -1,0 +1,19 @@
+Dataset:  data/1000/1000-out1.csv  MinSup:  0.03  MinConf:  0.7
+==================================================================
+('1:  Berry Tart (14),\tBottled Water (44)\tsupport=', 0.034)
+('2:  Strawberry Cake (4),\tNapoleon Cake (9)\tsupport=', 0.049)
+('3:  Chocolate Cake (0),\tCasino Cake (2)\tsupport=', 0.04)
+('4:  Raspberry Cookie (23),\tLemon Lemonade (40)\tsupport=', 0.031)
+('5:  Marzipan Cookie (27),\tTuile Cookie (28)\tsupport=', 0.053)
+('6:  Blueberry Tart (16),\tApricot Croissant (32)\tsupport=', 0.04)
+('7:  Blueberry Tart (16),\tHot Coffee (45)\tsupport=', 0.033)
+('8:  Gongolais Cookie (22),\tTruffle Cake (5)\tsupport=', 0.058)
+('9:  Cherry Tart (18),\tOpera Cake (3)\tsupport=', 0.041)
+('10:  Cheese Croissant (33),\tOrange Juice (42)\tsupport=', 0.038)
+('11:  Raspberry Cookie (23),\tLemon Cookie (24)\tsupport=', 0.033)
+('12:  Lemon Cookie (24),\tLemon Lemonade (40)\tsupport=', 0.031)
+('13:  Apricot Croissant (32),\tHot Coffee (45),\tBlueberry Tart (16)\tsupport=', 0.032)
+('14:  Apple Croissant (31),\tApple Tart (12),\tApple Danish (36),\tCherry Soda (48)\tsupport=', 0.031)
+Skyline Itemsets:  14
+
+

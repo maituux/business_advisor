@@ -1,0 +1,25 @@
+{% extends "customTemplate.html" %}
+{% block content %}	
+    <div class="container">
+		<div class="row">
+			<div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Start analysis process!</h4>
+                    </div>
+                    <div class="panel-body">
+                        {% if error %}<p class=error><strong>Error:</strong> {{ error }}
+                        {% endif %}
+						<form action='startAnalysis' method=post enctype=multipart/form-data>
+                                <legend>Choose file to process</legend>
+                                    <input type="checkbox" name="transactionFile" value="Transactional"/>Transaction Files <br />
+                                    <input type="checkbox" name="clientFile" value="Client"/>Client Files<br />
+
+                            <input type="submit" value="Run"/>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

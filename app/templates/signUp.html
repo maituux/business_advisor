@@ -1,56 +1,75 @@
-{% extends "basicTemplate.html" %}
-{% with messages = get_flashed_messages(with_categories=true) %}
-  	{% if messages %}
-    <ul class=flashes>
-    {% for category, message in messages %}
-      	<li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-{% block content %}	
-  <div class="container">
-		<div class="row">
-			
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+{% extends "customTemplate.html" %}
+{% block navigation %}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{ url_for('about') }}">About</a>
+            </li>
+            <li>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </li>                                      
+        </ul>
+    </div>
+{% endblock %}
+{% block content %} 
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>Sign Up</h4>
-                   
-				   </div>
-                   <div class="panel-body">
-						<form action="/signUp " method=POST>
+                        
+                    </div>
+                    <div class="panel-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul class=flashes>
+                                {% for category, message in messages %}
+                                <div class="alert alert-danger" role="alert">                                
+                                    <li class="{{ category }}">{{ message }}</li>                                    
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}                    
+                    {% if error %}<p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}   						
+                        <form action="/signup " method=POST>
 							<div class="control-group form-group">
 								<div class="controls">
 									<label>Company Name:</label>
 									<input type="text" class="form-control" placeholder="Company Name" name="inputName" id="register_fullname" required autofocus>
 								</div>
+                                <div class="form-group">
+                                    <label>Type of business:</label>
+                                    <input class="form-control"  list = "browsers" placeholder="Select a business type" name="inputSector" type="browser" id="register_username" required>
+                                        <datalist id="browsers">
+                                            <option value="Bakery">
+                                            <option value="Pharmacy">
+                                         </datalist>
+                                </div>                            
 								<div class="form-group">
-									<label>Company Adress:</label>
-                                    <input class="form-control" placeholder="Adress" name="inputAdress" type="text" id="register_username" required>
+									<label>Company Address:</label>
+                                    <input class="form-control" placeholder="Address" name="inputAddress" type="text" id="register_username" required>
                                 </div>	
 								<div class="form-group">
 									<label>Company Organisational Number:</label>
                                     <input class="form-control" placeholder="Organisational Number" name="inputOrganisationalNumber" type="text" id="register_username" required>
                                 </div>	
-							</div>				
-								<div class="form-group">
+                                <div class="form-group">
 									<label>Company Contact number:</label>
                                     <input class="form-control" placeholder="Contact Number" name="inputContactNumber" type="text" id="register_username" required>
                                 </div>
-                                <!--
-									<div class="form-group">
-									<label>Industry sector:</label>
-                                    <input class="form-control" placeholder="Username" name="inputIndustrySector" type="text" id="register_username" required>
-                                </div>
-                            -->
+                        
+                            </div>
                             <div class="control-group form-group">
                                 <div class="controls">
 									<label>Enter email:</label> 
                                     <input class="form-control" placeholder="Email" name="inputEmail" type="email" id="register_email" required>
-								</div>		
+								</div>
                                 <div class="form-group">
 									<label>Create username:</label>
                                     <input class="form-control" placeholder="Username" name="inputUserName" type="text" id="register_username" required>
@@ -59,7 +78,7 @@
 									<Label>Create password:</label>
                                     <input class="form-control" placeholder="Password" name="inputPassword" type="password" id="register_password" required>
                                 </div>
-                                 <div class="form-group">
+                                <div class="form-group">
 									<label>Re-enter password:</label>
                                     <input class="form-control" placeholder="Re-enter password" name="inputPassword2" type="password" id="register_password2" required>
                                 </div>	
@@ -69,18 +88,18 @@
 								<!-- : added to diplay the result of the registration-->
 								<br/>
 								<div class="form-group">
-								<label id="result"></label>
+								    <label id="result"></label>
 								</div>
 								<br/>
 								
 								<!-- : added to distinguish between the user and the company page -->
 								<input value="user" type="hidden" id="usertype">
-								
-                            </div>
+							</div>
                         </form>
                     </div>
                 </div>
-            </div>
-		</div>
+        </div>
+    </div>
+</div>
 {% endblock %}	
        

@@ -1,13 +1,15 @@
-{% extends "basicTemplate.html" %}
+{% extends "customTemplate.html" %}
 {% block content %}	
 	<div class="container">
         <!-- <div class="jumbotron"> -->
 		<div class="row">
             <div class="box">
                 <div class="col-lg-12 text-left">
-                    <h1 class="brand-name">Upload File</h1>
+                    <h1 class="brand-name">File Upload</h1>
                    <!-- <hr width="200"   align="left"> -->
-					<p class="lead">Please choose and upload the files you need to analyse. Once upload is successful you may choose to continue by pressing the button.</p>
+					<p class="lead">Please choose files to upload for analysis. Once upload is successful you may choose to continue by pressing the button.</p>
+					<a href="Users/POLY/Downloads/app/rules.csv" target = "_blank"> download template!</a>
+
 					<div class="row">
 					<div>
 						{% with messages = get_flashed_messages(with_categories=true) %}
@@ -67,6 +69,15 @@
 								</tr>
 							</table>		
 							</p>
+							<div class="col-md-6">
+								<p>
+									<!-- 
+								<form action='/continueAnalysis' method=get>
+    							<button type="submit">Continue</button>
+    							</form>
+    						-->
+    							<a id="continue_button" href="{{ url_for('startAnalysis') }}" button type="submit" class="btn btn-lg btn-success btn-block">Continue<a/>								
+							</div>								 
 						</div>						
 					</div>
 				</div>

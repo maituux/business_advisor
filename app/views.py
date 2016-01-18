@@ -1,9 +1,7 @@
 
-from flask import render_template, flash, redirect, url_for, json, request
+from flask import render_template, flash, redirect, url_for, json, request, session
 from app import app
 from .connection import db, customers
-# from .forms import LoginForm
-# from .models import Customer
 from werkzeug import secure_filename
 
 import datetime
@@ -25,17 +23,29 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/upload')
-def upload():
-  return render_template('upload.html')
+@app.route('/about_us')
+def about_signedIn():
+    return render_template('about2.html')    
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
+@app.route('/contact_us')
+def contact_signedIn():
+    return render_template('contact2.html')    
+
 @app.route('/myprofile')
 def profile():
-    return render_template('myprofile.html')    
+    return render_template('myprofile.html')
+
+@app.route('/startAnalysis')
+def startAnalysis():
+    return render_template('startAnalysis.html')    
+
+@app.route('/analysis')
+def analysis():
+    return render_template('analysis.html')          
 
 @app.route('/signup')
 def signup():
@@ -48,27 +58,15 @@ def signupcompleted():
 @app.route('/signin')
 def signin():
     return render_template('signIn.html')   
-# index view function suppressed for brevity
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         flash('Login requested for username="%s", password=%s' %
-#               (form.openid.data, str(form.remember_me.data)))
-#         return redirect('/index')
-#     return render_template('signin.html', 
-#                            title='Sign In',
-#                            form=form)
-
-@app.route('/signUp',methods=['POST'])
+@app.route('/signup',methods=['POST'])
 def signUp():
     error = None
     name = request.form['inputName']
-    adress = request.form['inputAdress']
+    address = request.form['inputAddress']
     organisationalNumber = request.form['inputOrganisationalNumber']
     contactNumber = request.form['inputContactNumber']
-    #sector = request.form['inputIndustrySector']
+    sector = request.form['inputSector']
     email = request.form['inputEmail']
     username = request.form['inputUserName']
     password = request.form['inputPassword']
@@ -80,30 +78,54 @@ def signUp():
 
     if full_form:
        
-        username_found=customers.find_one({"username": str(username)})
+        username_found= customers.find_one({"username": str(username)})
         print(username_found)
 
         if username_found != None:
             flash(u'That username is already taken, please choose another', 'error')
-            return redirect(url_for('signup'))
+            return redirect(url_for('signUp'))
         if not(equal_passwords): 
             error ='The password are not matching'
-            return redirect(url_for('signup'))
+            return redirect(url_for('signUp'))
         else:
-            newCustomer = {"name": str(name), "adress":str(adress), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), """sector: str(sector),""" "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
+            newCustomer = {"name": str(name), "address":str(address), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), "sector": str(sector), "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
 
             custid = customers.insert(newCustomer)
+            print custid
+            
+            customerDB= db['Customer_'+str(custid)]
+            custid = customerDB.insert({"custId": custid})
+            
+            """
+            print (customerDB)
+
+            newRegistry = {"custid": custid, "custDB": customerDB}
+
+            regid= registry.insert(newRegistry)
+            
+            jsonobj = customers.find(newCustomer)
+            
+            
+            customerName = {"name": str(name)}
+            customer_collection_id = db['Customer_'+str(custid)].insert(customerName)
+            collectionNewCustomer = db['Customer_'+str(custid)]
+            newCollection = {"transactions": None, "clients": None, "advices": None}
+            client_collection_id = db['Customer_'+str(custid)].insert(newCollection)
+
+            collectionTransaction = collectionNewCustomer.transactions
+            collectionClient = collectionNewCustomer.clients
+            """
             return redirect(url_for('signupcompleted'))
     else:
         error= 'The form is not correctly fulfilled'
-        return redirect(url_for('signup'))   
+        return redirect(url_for('signUp'))  
 
     #validate the received values
     # if full_form and equal_passwords:
     #     #for user in db.customer:
     #     #  print (user.username)
     #     #newCustomer = Customer(username, password)
-    #     newCustomer = {"name": str(name), "adress":str(adress), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), """sector: str(sector),""" "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
+    #     newCustomer = {"name": str(name), "address":str(address), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), """sector: str(sector),""" "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
 
     #     #custid = customers.insert(newCustomer)
     
@@ -129,7 +151,7 @@ def signUp():
     #         flash("The password are not matching")
     #         return render_template('signUp')
     #     else:
-    #         newCustomer = {"name": str(name), "adress":str(adress), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), """sector: str(sector),""" "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
+    #         newCustomer = {"name": str(name), "address":str(address), "email": str(email), "organisationalNumber": str(organisationalNumber), "contactNumber": str(contactNumber), """sector: str(sector),""" "email":str(email), "username": str(username), "password": str(password), "date": datetime.datetime.utcnow()}
 
     #         custid = customers.insert(newCustomer)
     #         return redirect(url_for('signupcompleted'))
@@ -140,7 +162,7 @@ def signUp():
        
         # newCustomer = Object()
         # newCustomer.name = str(name)
-        # newCustomer.adress= str(adress)
+        # newCustomer.address= str(address)
         # newCustomer.organisationalNumber=str(organisationalNumber)
         # newCustomer.contactNumber = str(contactNumber)
         # newCustomer.sector = str(sector)
@@ -167,7 +189,7 @@ def signUp():
 #       #return flash('Invalid authentication')
 #       #return redirect(url_for('signin')) 
 
-if __name__ == '__main__':
+"""if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run()"""
 

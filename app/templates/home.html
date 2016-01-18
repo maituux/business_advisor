@@ -1,7 +1,39 @@
-{% extends "basicTemplate.html" %}
+{% extends "customTemplate.html" %}
+{% block navigation %}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{ url_for('about') }}">About</a>
+            </li>
+            <li>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </li>                                      
+        </ul>
+    </div>
+{% endblock %}
 {% block content %}
     <div class="container">
-
+                    <div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    {% if category == 'message' %}
+                                <div class="alert alert-success" role="alert">
+<!--                                    <div class = "alert alert-success alert-dismissable">
+                                        <span class="glyphicon glyphicon-ok"></span> -->
+                                    {% else %}
+                                    <div class="alert alert-{{ category }}" role="alert">
+                                    {% endif %}
+                                        {{ message }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        </div>  
 		<div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">

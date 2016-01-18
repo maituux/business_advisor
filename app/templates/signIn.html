@@ -1,4 +1,19 @@
-{% extends "basicTemplate.html" %}
+{% extends "customTemplate.html" %}
+{% block navigation %}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{ url_for('about') }}">About</a>
+            </li>
+            <li>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </li>                                      
+        </ul>
+    </div>
+{% endblock %}
 {% block content %}	
  <div class="container">
         <div class="row">
@@ -10,7 +25,8 @@
 						
                     </div>
                     <div class="panel-body">
-                   {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}                        
+                   {% if error %}<p class=error><strong>Error:</strong> {{ error }}
+                   {% endif %}                        
 						<form  action="/login" method=POST name="signIn">
                             <fieldset>
                                 <div class="form-group">
@@ -30,13 +46,14 @@
 
                                 <!-- EB: added to diplay the result of the login-->
 								<div class="form-group">
-								<label id="result"></label>
+								    <label id="result"></label>
 								</div>
 								
                             </fieldset>
                         </form>
                     </div>
-                </div>
+                 </div>   
             </div>
         </div>
+    </div>    
 {% endblock %}

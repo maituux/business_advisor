@@ -1,0 +1,5 @@
+D a t a s e t : " " a p r i o r i _ d a t a . c s v " " M i n S u p : " " 0 . 2 " " M i n C o n f : " " 0 . 7
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Rule 1 ":	 " "Apple Tart (12),	Berry Tart (14)" 	--> "Blueberry Tart (16)" "	 [sup=" 0.23809523809523808 " conf=" 1.0 ]
+Rule 2 ":	 " "Apple Tart (12),	Blueberry Tart (16)" 	--> "Berry Tart (14)" "	 [sup=" 0.23809523809523808 " conf=" 1.0 ]
+Rule 3 ":	 " "Berry Tart (14),	Blueberry Tart (16)" 	--> "Apple Tart (12)" "	 [sup=" 0.23809523809523808 " conf=" 1.0 ]

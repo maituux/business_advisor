@@ -1,8 +1,21 @@
-{% extends "basicTemplate.html" %}
+{% extends "customTemplate.html" %}
+{% block navigation %}
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{{url_for('home')}}">Home</a>
+            </li>
+            <li>
+                <a href="{{url_for('about')}}">About</a>
+            </li>
+            <li>
+                <a href="{{url_for('contact')}}">Contact</a>
+            </li>                                      
+        </ul>
+    </div>
+{% endblock %}
 {% block content %}
-
     <div class="container">
-
         <div class="row">
             <div class="box">	
 				<div class="col-lg-12">
@@ -22,7 +35,7 @@
                         <strong></strong>
                     </p>
                     <p>Email:
-                        <strong><a href="mailto:name@example.com">name@example.com</a></strong>
+                        <strong><a href="mailto:name@example.com">ekaterina.dobrokhotova@gmail.com</a></strong>
                     </p>
                     <p>Address:
                         <strong>UPC C. Jordi Girona, 31
@@ -33,9 +46,7 @@
             </div>
         </div>
 	</div>		
-
     <div class="container">
-
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">

@@ -6,7 +6,7 @@ from flask import Flask
 #where we find the uploaded files(use double slash to avoid the IOError22: invalid filename)
 # path =  'C:\\Users\\POLY\\Google Drive\\Desktop\\UPC\\BIP\\project\\temp\\test\\*.'
 #path =  'C:\\Users\\POLY\\Google Drive\\Desktop\\UPC\\BIP\\project\\temp\\test'
-path = './test/'
+path = "C:\\Users\\POLY\Google Drive\\Desktop\\business\\app\\test"
 #this method will get all the files uploaded fron the temporary folder and display them on the browser
 def get_files(path):
 	files = os.listdir(path)

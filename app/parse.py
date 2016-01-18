@@ -2,10 +2,11 @@ import os
 import json
 import xlrd
 from xlrd import open_workbook
-from flask import Flask
 
-#path = 'C:\\Users\\POLY\\Google Drive\\Desktop\\UPC\\BIP\\project\\temp\\test\\'
-path = './test/'
+
+# path = 'C:\\Users\\POLY\\Google Drive\\Desktop\\UPC\\BIP\\project\\temp\\test\\'
+path = os.path.expanduser("~/Desktop/business/app/test")
+#path = "C:\\Users\\POLY\Google Drive\\Desktop\\business\\app\\test"
 filename = ''
 
 def parse_file(filename):
@@ -30,6 +31,7 @@ def parse_file(filename):
 	with open(os.path.join(path, base_filename + "." + filename_suffix), 'w') as f:
 		f.write(json.dumps(dict_list))
 	return os.path.join(path, base_filename + "." + filename_suffix)
-	
+
+
 
 		
